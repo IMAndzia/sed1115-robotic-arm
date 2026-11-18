@@ -4,7 +4,7 @@
 This repository contains the embedded software design and source data for an inspired by the mechanical "Etch A Sketch" toy, this system runs on a Raspberry Pi Pico using MicroPython. It reads continuous horizontal (X) and vertical (Y) coordinate inputs from two analog potentiometers and pen elevation commands from a toggle switch, processes the data through trigonometric inverse kinematics, and drives three independent PWM servos to actuate the shoulder joint, elbow joint and pen mechanism.
 
 ## Module Responsibilities
-1. Anna Rogowsla - Inverse kinematics math (Kinematics.py)
+1. Anna Rogowska - Inverse kinematics math (Kinematics.py)
                  - Joint movement routines (Arm_control.py)
                  - Unit test developement (test_kinematics.py)
                  - Main program loop for the Raspberry Pi Pico brachiograph (main.py)

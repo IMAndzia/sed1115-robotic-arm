@@ -28,10 +28,10 @@ D_MIN = 2300  # Minimum allowed duty cycle
 D_MAX = 7500  # Maximum allowed duty cycle
 PEN_UP = 2300    # Duty cycle for pen up
 PEN_DOWN = 3000  # Duty cycle for pen down
-PAPER_WIDTH = 215.9   # mm, US Letter
-PAPER_HEIGHT = 279.4  # mm
-PAPER_X_OFFSET = 0    # set based on paper position relative to arm
-PAPER_Y_OFFSET = 155  # example: paper starts in front of the shoulder
+PAPER_WIDTH = 216   # mm, US Letter
+PAPER_HEIGHT = 280  # mm
+PAPER_X_OFFSET = -50    # set based on paper position relative to arm
+PAPER_Y_OFFSET = 140  # example: paper starts in front of the shoulder
 
 pen_switch = Pin(12, Pin.IN, Pin.PULL_DOWN)
 pen_pwm = PWM(Pin(2))
@@ -39,5 +39,3 @@ pen_pwm.freq(50)  # Standard servo frequency 50 Hz
 pen_write = False # False = up, True = down
 last_pen_button_state = 0
 
-Maximum_coordinates_x, Maximum_coordinates_y = 200, 200
-Minimum_coordinates_x, Minimum_coordinates_y = -200, 50

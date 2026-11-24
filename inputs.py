@@ -1,5 +1,7 @@
 from machine import PWM, ADC, Pin
 import config, arm_control
+L1 = 155
+L2 = 155
 def read_knobs():
      """read the values from the potentiometers and convert them to x and y coordinates"""
      x_value = config.x_axis.read_u16()  #read the X potentiometer value (0-65535)

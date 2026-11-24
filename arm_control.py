@@ -12,30 +12,20 @@ def safe_angle(servo, angle):
     if 0 <= angle <= 180:
         duty = inputs.translate(angle)
         safe_duty(servo, duty)
+L1 = 155
+L2 = 155
 
-def clamp_paper_position(x_cord, y_cord):
-    half_width = config.PAPER_WIDTH / 2
-
-    x_cord = max(config.PAPER_X_OFFSET - half_width,
-                 min(config.PAPER_X_OFFSET + half_width, x_cord))
-    y_cord = max(config.PAPER_Y_OFFSET,
-                 min(config.PAPER_Y_OFFSET + config.PAPER_HEIGHT, y_cord))
-
-    return x_cord, y_cord
 def ITS_ALIVE():
     print("The robot arm is alive and ready to move!")
     #Gets the intial values of the knobs and converts them to x and y coordinates
     x_raw, y_raw = inputs.read_knobs()
 
-    x_cord = (x_raw / 65535) * config.PAPER_WIDTH - (config.PAPER_WIDTH / 2) + config.PAPER_X_OFFSET
-    y_cord = (y_raw / 65535) * config.PAPER_HEIGHT + config.PAPER_Y_OFFSET
-    x_cord, y_cord = clamp_paper_position(x_cord, y_cord)
-
+    x_cord = ((x_raw / 65535) * config.PAPER_WIDTH) + config.PAPER_X_OFFSET
+    y_cord = ((y_raw / 65535) * config.PAPER_HEIGHT) + config.PAPER_Y_OFFSET
+   
     #Ugly math
-    theta1, theta2 = kinematics.inverse_kinematics(x_cord, y_cord)
-    if theta1 is None or theta2 is None:
-        print("Initial position is out of reach. Please adjust the knobs.")
-        return
+    theta1, theta2 = kinematics.inverse_kinematics(x_cord, y_cord, L1, L2, min_angle_deg=-20, max_angle_deg=160)
+    
 
     print(f"Initial position: x={x_cord:.2f}, y={y_cord:.2f}, theta1={theta1:.2f}, theta2={theta2:.2f}")
     safe_angle(config.shoulder_pwm, theta1)
